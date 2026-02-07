@@ -13,3 +13,14 @@ export async function getMediaList(): Promise<MediaItem[]> {
     orderBy: { createdAt: 'desc' }
   });
 }
+
+export async function createMedia(input: Omit<MediaItem, 'id'>): Promise<MediaItem> {
+  return prisma.mediaItem.create({
+    data: {
+      title: input.title,
+      imageUrl: input.imageUrl,
+      audioBase64: input.audioBase64,
+      audioMimeType: input.audioMimeType
+    }
+  });
+}
