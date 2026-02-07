@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model MediaItem {
+  id            Int      @id @default(autoincrement())
+  title         String
+  imageUrl      String
+  audioBase64   String   @db.Text
+  audioMimeType String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("media_items")
+}
