@@ -30,5 +30,10 @@ npm run prisma:seed
 }
 
 
-# Import cors
+# Import cors #
 npm i --save-dev @types/cors
+
+
+# Adiçao do upload de imagem #  
+npm i multer
+npm i -D @types/multer
