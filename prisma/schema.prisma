@@ -18,3 +18,14 @@ model MediaItem {
 
   @@map("media_items")
 }
+
+model AdminUser {
+  id           String   @id @default(uuid())
+  name         String   @unique
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admin_users")
+}

@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import { mediaRouter } from "./routes/media";
+import { adminRouter } from "./routes/admin";
 
 const app = express();
 
@@ -17,6 +18,7 @@ const uploadsPublicPath = process.env.UPLOADS_PUBLIC_PATH || "/files";
 app.use(uploadsPublicPath, express.static(uploadsDir));
 
 app.use("/api/media", mediaRouter);
+app.use("/admin", adminRouter);
 
 const port = process.env.PORT ? Number(process.env.PORT) : 8080;
 app.listen(port, () => {

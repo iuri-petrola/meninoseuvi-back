@@ -21,13 +21,14 @@ npm run prisma:seed
 
 
 
-# Body esperado:
-{
-  "title": "Historia 1",
-  "imageUrl": "https://picsum.photos/seed/meninos4/800/600",
-  "audioBase64": "BASE64_AUDIO_AQUI",
-  "audioMimeType": "audio/mpeg"
-}
+# comando CURL:
+curl --request POST \
+  --url http://localhost:8080/api/media \
+  --header 'Content-Type: multipart/form-data' \
+  --form 'title=Historia 5' \
+  --form audioMimeType=audio/mpeg \
+  --form audioBase64=BASE64_AUDIO_AQUI \
+  --form 'image=@/path/arquivo/img.jpg'
 
 
 # Import cors #
@@ -37,3 +38,15 @@ npm i --save-dev @types/cors
 # Adiçao do upload de imagem #  
 npm i multer
 npm i -D @types/multer
+
+
+# Criação tabela admin_users:
+cd $PATH_ABSOLUTO/MeninosEuVi-backNodeJS
+npx prisma migrate dev --name admin
+npm run prisma:seed
+
+
+# Rodar migração para o @unique do name:
+cd $PATH_ABSOLUTO/MeninosEuVi-backNodeJS
+npx prisma migrate dev --name admin_login_by_name
+npm run prisma:seed
