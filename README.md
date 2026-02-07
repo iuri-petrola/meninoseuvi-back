@@ -24,7 +24,7 @@ npm run prisma:seed
 # Body esperado:
 {
   "title": "Historia 1",
-  "imageUrl": "https://...",
+  "imageUrl": "https://picsum.photos/seed/meninos4/800/600",
   "audioBase64": "BASE64_AUDIO_AQUI",
   "audioMimeType": "audio/mpeg"
 }
