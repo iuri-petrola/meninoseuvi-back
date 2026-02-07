@@ -28,3 +28,7 @@ npm run prisma:seed
   "audioBase64": "BASE64_AUDIO_AQUI",
   "audioMimeType": "audio/mpeg"
 }
+
+
+# Import cors
+npm i --save-dev @types/cors
