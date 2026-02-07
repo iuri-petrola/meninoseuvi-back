@@ -18,7 +18,7 @@ const uploadsPublicPath = process.env.UPLOADS_PUBLIC_PATH || "/files";
 app.use(uploadsPublicPath, express.static(uploadsDir));
 
 app.use("/api/media", mediaRouter);
-app.use("/admin", adminRouter);
+app.use("/api/admin", adminRouter);
 
 const port = process.env.PORT ? Number(process.env.PORT) : 8080;
 app.listen(port, () => {
