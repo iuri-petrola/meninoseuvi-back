@@ -50,3 +50,12 @@ npm run prisma:seed
 cd $PATH_ABSOLUTO/MeninosEuVi-backNodeJS
 npx prisma migrate dev --name admin_login_by_name
 npm run prisma:seed
+
+
+
+# Alterar senha do usuario # 
+ADMIN_USERNAME=admin ADMIN_EMAIL=admin@meninoseuvi.com ADMIN_PASSWORD= npm run prisma:seed
+
+# ATENÇAO #
+# Setar o valor da variavel ADMIN_PASSWORD em tempo de execuçao, 
+# NAO precisa colocar aspas e nenhum outro caractere.

@@ -6,9 +6,23 @@ import readline from 'readline';
 const prisma = new PrismaClient();
 
 async function main() {
-  const adminName = await ask('Admin username: ');
-  const adminEmail = await ask('Admin email: ');
-  const adminPassword = await ask('Admin password: ');
+  const hasTty = !!process.stdin.isTTY;
+
+  let adminName = process.env.ADMIN_USERNAME || '';
+  let adminEmail = process.env.ADMIN_EMAIL || '';
+  let adminPassword = process.env.ADMIN_PASSWORD || '';
+
+  if (!adminName || !adminEmail || !adminPassword) {
+    if (!hasTty) {
+      throw new Error(
+        'Seed sem TTY. Defina ADMIN_USERNAME, ADMIN_EMAIL e ADMIN_PASSWORD no ambiente para rodar.'
+      );
+    }
+
+    adminName = adminName || await ask('Admin username: ');
+    adminEmail = adminEmail || await ask('Admin email: ');
+    adminPassword = adminPassword || await ask('Admin password: ');
+  }
 
   if (adminName && adminEmail && adminPassword) {
     const passwordHash = await hash(adminPassword, 10);
@@ -47,15 +61,20 @@ async function main() {
   
 }
 
-function ask(question: string): Promise<string> {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
+const rl = process.stdin.isTTY
+  ? readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    })
+  : null;
 
+function ask(question: string): Promise<string> {
   return new Promise((resolve) => {
+    if (!rl) {
+      resolve('');
+      return;
+    }
     rl.question(question, (answer) => {
-      rl.close();
       resolve(answer.trim());
     });
   });
@@ -68,3 +87,7 @@ main()
     await prisma.$disconnect();
     process.exit(1);
   });
+
+process.on('exit', () => {
+  rl?.close();
+});
