@@ -23,7 +23,7 @@ export async function loginAdmin({ name, password }: LoginInput) {
   const token = jwt.sign(
     { role: 'admin' },
     process.env.JWT_SECRET || '',
-    { subject: admin.id, expiresIn: '12h' }
+    { subject: admin.id, expiresIn: '30m' }
   );
 
   return {
