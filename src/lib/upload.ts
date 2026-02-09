@@ -17,4 +17,10 @@ const storage = multer.diskStorage({
   }
 });
 
-export const upload = multer({ storage });
+export const upload = multer({
+  storage,
+  limits: {
+    fieldSize: 50 * 1024 * 1024, // 50MB for audioBase64
+    fileSize: 20 * 1024 * 1024 // 20MB for image file
+  }
+});
