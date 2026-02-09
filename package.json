@@ -7,6 +7,8 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "prisma db seed",
+    "prisma:seed:user": "ts-node prisma/AlterUser.ts",
+    "prisma:seed:media": "ts-node prisma/InsertMediaDefault.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "prd": "rm -rf dist/ && tsc && node dist/index.js"
@@ -36,6 +38,6 @@
     "prisma": "^6.19.2"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/AlterUser.ts && ts-node prisma/InsertMediaDefault.ts"
   }
 }
